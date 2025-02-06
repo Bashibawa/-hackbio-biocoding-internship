@@ -1,0 +1,11 @@
+# Assign "hexokinase" and 1616 to 2 variable names in one line
+enzyme, molecular_weight = "hexokinase", 1616
+
+# Assign "H.sapiens" to a variable name
+organism = "H.sapiens"
+
+# Assign 3800 to a variable name
+sequence_length = 3800
+
+# Print all the variable names in the exercise with one print statement
+print(f"Enzyme: {enzyme}, Molecular Weight: {molecular_weight}, Organism: {organism}, Sequence Length: {sequence_length}")
