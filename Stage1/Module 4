@@ -12,3 +12,38 @@ if b > a:
 elif a == b:
   print("a and b are equal")
 
+# The else keyword catches anything which isn't caught by the preceding conditions. i.e. if all the previous conditions are not true, use this.
+a = 200
+b = 33
+if b > a:
+  print("b is greater than a")
+elif a == b:
+  print("a and b are equal")
+else:
+  print("a is greater than b")
+
+#Let's start with a simple example of iterating over a list of species:
+species = ["Homo sapiens", "Pan troglodytes", "Gorilla gorilla"]
+
+for sp in species:
+    print(sp)
+
+dna_sequences = ["ATGCGTAC", "GCTTAGCT", "CGTACGTA"]
+dna_sequences
+
+for seq in dna_sequences:
+    g_count = seq.count('G')
+    c_count = seq.count('C')
+    gc_content = ((g_count + c_count) / len(seq)) * 100
+    print(f"GC content of {seq}: {gc_content:.2f}%")
+
+# Write a for loop to calculate the GC content for a new list of DNA sequences: ["AAGCTCGG", "GGCGTA", "TTAAGGCC"].
+new_dna_sequences = ["AAGCTCGG", "GGCGTA", "TTAAGGCC"]
+new_dna_sequences
+
+for newseq in new_dna_sequences:
+    new_gcount = newseq.count('G')
+    new_ccount = newseq.count('C')
+    new_gc_content = ((new_gcount + new_ccount) / len(newseq)) * 100
+    print(f"GC content of {newseq}: {new_gc_content:.2f}%")
+
