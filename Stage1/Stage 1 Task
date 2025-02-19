@@ -1,1 +1,41 @@
+Write a function for translating DNA to protein
+def dna_to_protein(dna):   #Translates DNA to protein.
+  codons = {
+    'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
+    'TCT': 'S', 'TCC': 'S', 'TCA': 'S', 'TCG': 'S',
+    'TAT': 'Y', 'TAC': 'Y', 'TAA': '*', 'TAG': '*',
+    'TGT': 'C', 'TGC': 'C', 'TGA': '*', 'TGG': 'W',
+    'CTT': 'L', 'CTC': 'L', 'CTA': 'L', 'CTG': 'L',
+    'CCT': 'P', 'CCC': 'P', 'CCA': 'P', 'CCG': 'P',
+    'CAT': 'H', 'CAC': 'H', 'CAA': 'Q', 'CAG': 'Q',
+    'CGT': 'R', 'CGC': 'R', 'CGA': 'R', 'CGG': 'R',
+    'ATT': 'I', 'ATC': 'I', 'ATA': 'I', 'ATG': 'M',
+    'ACT': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',
+    'AAT': 'N', 'AAC': 'N', 'AAA': 'K', 'AAG': 'K',
+    'AGT': 'S', 'AGC': 'S', 'AGA': 'R', 'AGG': 'R',
+    'GTT': 'V', 'GTC': 'V', 'GTA': 'V', 'GTG': 'V',
+    'GCT': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
+    'GAT': 'D', 'GAC': 'D', 'GAA': 'E', 'GAG': 'E',
+    'GGT': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G'
+  }
+
+  protein = ""
+  for i in range(0, len(dna), 3):
+    codon = dna[i:i + 3]
+    if len(codon) == 3:
+      protein += codons.get(codon, '?') #uses ? for unknown/invalid codon
+    else:
+        break  # to stop if not a full codon.
+  return protein
+
+dna_sequence = "ATGCGTACGTTAGATGCGTACGTTAGCCTAGCTAGCATGCATCGATCG"
+protein_sequence = dna_to_protein(dna_sequence)
+print("After translation the protein sequence is given by: ", protein_sequence)
+
+# DNA sequence with invalid characters and a non-multiple of three length
+dna_sequence = "ATGCGTACGTTAGCCTAGXTAGCATGCATCGATCZ"
+protein_sequence = dna_to_protein(dna_sequence)
+print("DNA sequence with invalid characters and a non-multiple of three length will translate to: ", protein_sequence)
+
+
 
