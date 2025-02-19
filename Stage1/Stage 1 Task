@@ -1,4 +1,5 @@
-Write a function for translating DNA to protein
+1. Write a function for translating DNA to proteinC
+#code is given below:
 def dna_to_protein(dna):   #Translates DNA to protein.
   codons = {
     'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
@@ -37,5 +38,235 @@ dna_sequence = "ATGCGTACGTTAGCCTAGXTAGCATGCATCGATCZ"
 protein_sequence = dna_to_protein(dna_sequence)
 print("DNA sequence with invalid characters and a non-multiple of three length will translate to: ", protein_sequence)
 
+#Output is given by
+After translation the protein sequence is given by:  MRTLDAYVSLASMHRS
+DNA sequence with invalid characters and a non-multiple of three length will translate to:  MRTLA*?ACID
 
 
+
+
+
+
+2. Write a function that simulates and generates a logistic population growth curve.
+#Code
+import random
+import matplotlib.pyplot as plt
+
+def make_population_curve(carrying_capacity, initial_population, growth_rate, total_time):
+    time = 0
+    population = initial_population
+    time_points = []
+    population_points = []
+
+    # Random lag phase
+    lag_time = random.randint(0, int(total_time / 4)) #random lag time
+    
+    #random exponential phase
+    exponential_time = random.randint(int(total_time / 4), int(total_time / 2))
+
+    while time <= total_time:
+        time_points.append(time)
+        population_points.append(population)
+
+        if time < lag_time:
+            # Lag phase: minimal growth
+            population = population
+        elif time < exponential_time:
+            # Exponential growth
+            population = population + (growth_rate * population)
+        else:
+            # Slowing growth towards carrying capacity
+            population = population + (growth_rate * population * (1 - population / carrying_capacity))
+
+        time = time + 1
+
+    # Plotting the curve
+    plt.plot(time_points, population_points)
+    plt.xlabel("Time")
+    plt.ylabel("Population Size")
+    plt.title("Logistic Population Growth Curve")
+    plt.show()
+
+# Example usage
+carrying_capacity = 1000
+initial_population = 10
+growth_rate = 0.1
+total_time = 100
+
+make_population_curve(carrying_capacity, initial_population, growth_rate, total_time)
+
+#Output:
+
+
+
+
+
+3. Write a function for determining the time to reach 80% of the maximum growth; usually the carrying capacity.
+Code:
+import random
+import pandas as pd
+
+def make_population_curve(carrying_capacity, initial_population, growth_rate, total_time):
+    time = 0
+    population = initial_population
+    time_points = []
+    population_points = []
+
+    # Random lag phase
+    lag_time = random.randint(0, int(total_time / 4)) #random lag time
+    
+    #random exponential phase
+    exponential_time = random.randint(int(total_time / 4), int(total_time / 2))
+
+    while time <= total_time:
+        time_points.append(time)
+        population_points.append(population)
+
+        if time < lag_time:
+            # Lag phase: minimal growth
+            population = population
+        elif time < exponential_time:
+            # Exponential growth
+            population = population + (growth_rate * population)
+        else:
+            # Slowing growth towards carrying capacity
+            population = population + (growth_rate * population * (1 - population / carrying_capacity))
+
+        time = time + 1
+
+    return time_points, population_points
+
+# Generate 100 growth curves
+num_curves = 100
+total_time = 100
+data = {}
+
+for i in range(num_curves):
+    # Random parameters for each curve
+    carrying_capacity = random.randint(500, 2000)
+    initial_population = random.randint(1, 50)
+    growth_rate = random.uniform(0.05, 0.2)
+
+    time_points, population_points = make_population_curve(carrying_capacity, initial_population, growth_rate, total_time)
+
+    # Add data to dictionary
+    data[f"time_{i}"] = time_points
+    data[f"population_{i}"] = population_points
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+
+
+# Print the first few rows of the DataFrame
+print(df.head())
+
+#Output:
+  time_0  population_0  time_1  population_1  time_2  population_2  time_3  \
+0       0          23.0       0           9.0       0          27.0       0   
+1       1          23.0       1           9.0       1          27.0       1   
+2       2          23.0       2           9.0       2          27.0       2   
+3       3          23.0       3           9.0       3          27.0       3   
+4       4          23.0       4           9.0       4          27.0       4   
+
+   population_3  time_4  population_4  ...  time_95  population_95  time_96  \
+0          35.0       0           5.0  ...        0       2.000000        0   
+1          35.0       1           5.0  ...        1       2.000000        1   
+2          35.0       2           5.0  ...        2       2.000000        2   
+3          35.0       3           5.0  ...        3       2.186025        3   
+4          35.0       4           5.0  ...        4       2.389353        4   
+
+   population_96  time_97  population_97  time_98  population_98  time_99  \
+0           45.0        0           33.0        0           34.0        0   
+1           45.0        1           33.0        1           34.0        1   
+2           45.0        2           33.0        2           34.0        2   
+3           45.0        3           33.0        3           34.0        3   
+4           45.0        4           33.0        4           34.0        4   
+
+   population_99  
+0            9.0  
+1            9.0  
+2            9.0  
+3            9.0  
+4            9.0  
+
+[5 rows x 200 columns]
+
+
+
+
+4. Write a function for determining the time to reach 80% of the maximum growth; usually the carrying capacity
+#Code:
+import random
+
+def time_to_reach_80_percent(carrying_capacity, initial_population, growth_rate, total_time):
+    # Start from the initial population
+    population = initial_population
+    time = 0
+    
+    # Define the target population size
+    target_population = 0.8 * carrying_capacity
+    
+    # Random lag phase
+    lag_time = random.randint(0, int(total_time / 4))
+    
+    # Random exponential phase
+    exponential_time = random.randint(int(total_time / 4), int(total_time / 2))
+    
+    while time <= total_time:
+        if population >= target_population:
+            return time  # Return the time when population reaches 80% of carrying capacity
+        
+        if time < lag_time:
+            # Lag phase: population remains the same
+            population = population
+        elif time < exponential_time:
+            # Exponential growth phase
+            population = population + (growth_rate * population)
+        else:
+            # Slowing growth phase
+            population = population + (growth_rate * population * (1 - population / carrying_capacity))
+        
+        time += 1  # Increase time step
+    
+    return -1  # If the population never reaches 80%, return -1
+
+
+carrying_capacity = 1000
+initial_population = 10
+growth_rate = 0.1
+total_time = 100
+
+# Call the function and print result
+time_to_reach = time_to_reach_80_percent(carrying_capacity, initial_population, growth_rate, total_time)
+print("Time to reach 80% of carrying capacity:", time_to_reach)
+
+#Output:
+Time to reach 80% of carrying capacity: 79
+
+
+
+5. Write a function for calculating the hamming distance between the Slack username and X handle
+def hamming_distance_bashidoshi(slack_username, twitter_handle):
+    slack_username = "Bashidoshi"
+    twitter_handle = "@bashidoshi"
+
+    # Padding
+    if len(slack_username) < len(twitter_handle):
+        slack_username += " " * (len(twitter_handle) - len(slack_username))
+    elif len(twitter_handle) < len(slack_username):
+        twitter_handle += " " * (len(slack_username) - len(twitter_handle))
+
+    # Calculate Hamming distance
+    distance = 0
+    for i in range(len(slack_username)):
+        if slack_username[i] != twitter_handle[i]:
+            distance += 1
+
+    return distance
+
+distance = hamming_distance_bashidoshi("Bashidoshi", "@bashidoshi")
+print(f"Hamming distance: {distance}")
+
+#Output:
+Hamming distance: 11
