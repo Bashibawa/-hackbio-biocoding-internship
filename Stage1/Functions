@@ -1,1 +1,86 @@
+#Functions
+#A function is a block of code that runs when you call it. You can pass data to a function (parameters), and it can return data as a result.
+
+# def function_name(parameters):
+     # Code to execute
+#    return result
+
+# def: This keyword is used to define a function.
+# function_name: The name of the function.
+# parameters: Optional inputs the function can take.
+# return: This keyword is used to send back the result from a function.
+
+# Let's create a function to calculate the GC content of a DNA sequence.
+def gc_content(sequence):
+    g_count = sequence.count('G')
+    c_count = sequence.count('C')
+    gc_content_percentage = ((g_count + c_count) / len(sequence)) * 100
+    return gc_content_percentage
+
+dna_sequence = "ATGCGTAC"
+gc = gc_content(dna_sequence)
+print(f"GC content of {dna_sequence}: {gc:.2f}%")
+
+#Based on the last slide, write a function to calculate the AT content of a DNA sequence.
+
+def at_content(sequence):
+    a_count = sequence.count('A')
+    t_count = sequence.count('T')
+    at_content_percentage = ((a_count + t_count) / len(sequence)) * 100
+    return at_content_percentage
+
+
+dna_sequence = "ATGCGTAC"
+at = at_content(dna_sequence)
+print(f"AT content of {dna_sequence}: {at:.2f}%")
+
+#You can set default values for parameters. Let’s modify the GC content function to assume the input is uppercase by default but allow lowercase inputs if specified.
+
+def gc_content(sequence, uppercase=True):
+    if not uppercase:
+        sequence = sequence.upper()
+    g_count = sequence.count('G')
+    c_count = sequence.count('C')
+    gc_content_percentage = ((g_count + c_count) / len(sequence)) * 100
+    return gc_content_percentage
+
+print(gc_content("atgcgtac", uppercase=False))
+print(gc_content("ATGCGTAC"))
+
+# Modify the gc_content calculation function to include an optional parameter (a boolean) that determines whether to prin a detailed breakdown of the counts of each nucleotide.
+
+def gc_content(sequence, uppercase=True, detailed=False):
+    """
+    Calculates the GC content of a DNA sequence.
+
+    Args:
+        sequence (str): The DNA sequence.
+        uppercase (bool, optional): Whether to convert the sequence to uppercase. Defaults to True.
+        detailed (bool, optional): Whether to print a detailed breakdown of nucleotide counts. Defaults to False.
+
+    Returns:
+        float: The GC content percentage.
+    """
+    if not uppercase:
+        sequence = sequence.upper()
+    g_count = sequence.count('G')
+    c_count = sequence.count('C')
+    a_count = sequence.count('A')
+    t_count = sequence.count('T')
+    gc_content_percentage = ((g_count + c_count) / len(sequence)) * 100
+
+    if detailed:
+        print(f"Detailed nucleotide counts:")
+        print(f"  G: {g_count}")
+        print(f"  C: {c_count}")
+        print(f"  A: {a_count}")
+        print(f"  T: {t_count}")
+
+    return gc_content_percentage
+
+# Example Usage
+print(gc_content("atgcgtac", uppercase=False, detailed=True))
+print(gc_content("ATGCGTAC", detailed=True))
+print(gc_content("ATGCGTAC")) # detailed is false by default.
+
 
